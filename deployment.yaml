@@ -1,15 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: tomcatinfra
+  name: tomcat-deployment
+  labels:
+    app: tomcat
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: tomcat
   template:
     metadata:
-      name: tomcatinfra
       labels:
-        app: tomcatinfra
+        app: tomcat
     spec:
       containers:
-      - name: tomcatapp
+      - name: tomcat
         image: harsha2018/tomcat1:latest
+        ports:
+        - containerPort: 8080
